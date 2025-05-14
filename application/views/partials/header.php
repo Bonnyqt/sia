@@ -1,3 +1,17 @@
+<?php
+
+if (!isset($this->log_model)) {
+    $CI =& get_instance();
+    $CI->load->model('LogModel', 'log_model');
+    if ($CI->session->userdata('user_id')) {
+        $user_id = $CI->session->userdata('user_id');
+        $username = $CI->session->userdata('username');
+        $action = 'Visited: ' . current_url();
+        $CI->log_model->log_action($user_id, $username, $action);
+    }
+}
+?>
+
 <link rel="icon" type="image/x-icon" href="/sia/uploads/test.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -531,7 +545,7 @@ button[type="submit"]:hover {
 
 
 
-<!-- JavaScript -->
+
 <script>
   function openLoginPopup() {
     document.getElementById('loginPopup').style.display = 'flex';
@@ -598,6 +612,16 @@ button[type="submit"]:hover {
 </div>
 <script>
     function requestPassword() {
+        // Log the "Show API Key" action via AJAX
+        fetch('/sia/index.php/log/show_api', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ action: 'Showed API Key' })
+        });
+
         document.getElementById('passwordModal').style.display = 'block';
     }
 

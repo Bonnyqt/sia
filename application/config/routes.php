@@ -36,3 +36,4 @@ $route['api/store-data'] = 'apicontroller/storeData';
 $route['admin'] = 'admin/admin_dashboard';
 $route['admin'] = 'admin/admin_logs';
 $route['admin'] = 'admin/admin_users';
+$route['admin'] = 'admin/admin_blogs';

@@ -22,7 +22,10 @@ class BlogModel extends CI_Model
         $query = $this->db->get($this->table);
         return $query->result_array(); // Return results as an array
     }
-
+public function countBlogs()
+{
+    return $this->db->count_all('blog_posts'); // replace 'users' with your actual table name
+}
 
     public function get_all($user_id = null)
     {
@@ -84,5 +87,9 @@ public function get_user_posts($userId)
     $query = $this->db->get($this->table); 
     return $query->result_array();
 }
-
+public function get_all_blogs()
+    {
+        $query = $this->db->get('blog_posts'); 
+        return $query->result();
+    }
 }

@@ -15,7 +15,10 @@ public function get_by_api_key($apiKey)
     $this->db->where('api_key', $apiKey);
     return $this->db->get('users')->row_array(); 
 }
-
+public function countUsers()
+{
+    return $this->db->count_all('users'); // replace 'users' with your actual table name
+}
 
 public function get_user($userId)
 {
@@ -51,7 +54,7 @@ public function get_user($userId)
         return $this->db->get_where($this->table, ['username' => $username])->row_array();
     }
 
-    // Get user by API key
+
     public function getUserByApiKey($apiKey)
     {
         return $this->db->get_where($this->table, ['api_key' => $apiKey])->row_array();
@@ -68,5 +71,10 @@ public function get_user($userId)
     {
         $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
+    }
+    public function get_all_users()
+    {
+        $query = $this->db->get('users'); 
+        return $query->result();
     }
 }

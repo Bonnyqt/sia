@@ -9,7 +9,7 @@ class Blog extends CI_Controller
     {
         parent::__construct();
         $this->load->helper(['form', 'url']);
-        $this->load->model(['BlogModel', 'UserModel']);
+        $this->load->model(['BlogModel', 'UserModel','LogModel']);
         $this->dataFile = APPPATH . '../writable/blog_posts.json'; // Adjusted path
         $this->load->library('session');
         
@@ -66,7 +66,7 @@ class Blog extends CI_Controller
         $userId = $this->session->userdata('user_id');
         $user = $this->UserModel->get_user($userId);
         $username = $isAnonymous ? 'Anonymous' : ($user['username'] ?? 'Unknown');
-
+        
         $postData = [
             'title' => $title,
             'content' => $content,
@@ -85,6 +85,7 @@ class Blog extends CI_Controller
         // Append to JSON file
         $postData['created_at'] = date('Y-m-d H:i:s');
         $postData['id'] = $this->db->insert_id();
+        $this->LogModel->log_action($userId, $username, "Created a new blog post titled '{$title}'");
         $posts = file_exists($this->dataFile) ? json_decode(file_get_contents($this->dataFile), true) : [];
         $posts[] = $postData;
         file_put_contents($this->dataFile, json_encode($posts, JSON_PRETTY_PRINT));
@@ -195,6 +196,7 @@ public function getPost($id)
         $post['username'] = $username;
 
         if ($this->BlogModel->update_post($id, $post)) {
+            $this->LogModel->log_action($userId, $username, "Updated blog post titled '{$title}'");
             $this->session->set_flashdata('success', 'Post updated successfully.');
         } else {
             $this->session->set_flashdata('error', 'Failed to update the post.');
@@ -216,8 +218,9 @@ public function getPost($id)
             $this->session->set_flashdata('error', 'Unauthorized access.');
             redirect('blog/myposts');
         }
-
-        if ($this->BlogModel->delete_post($id)) {
+        $title = $post['title'];
+        if ($this->BlogModel->delete_post($id, $post)) {
+            $this->LogModel->log_action($userId, $username, "Deleted a blog post titled: '{$title}'");
             $this->session->set_flashdata('success', 'Post deleted successfully.');
         } else {
             $this->session->set_flashdata('error', 'Failed to delete the post.');

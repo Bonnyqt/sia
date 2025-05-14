@@ -25,66 +25,49 @@
         <div class="col-lg-6 col-12">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
-              <div class="card">
+               <a href="/sia/index.php/admin/admin_users"> <div class="card">
                 <span class="mask bg-primary opacity-10 border-radius-lg"></span>
                 <div class="card-body p-3 position-relative">
                   <div class="row">
                     <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-circle-08 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
+                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl" style="align-items: center; display: flex; justify-content: center; width: 50px; height: 50px;">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+</svg>
                       </div>
+                      
                       <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        1600
+                         <?php echo $user_count; ?>
                       </h5>
-                      <span class="text-white text-sm">Users Active</span>
+                      <span class="text-white text-sm">Users Registered</span>
                     </div>
-                    <div class="col-4">
-                      <div class="dropdown text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers1" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers1">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+55%</p>
-                    </div>
+                   
                   </div>
                 </div>
-              </div>
+              </div></a>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
-              <div class="card">
+          <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
+               <a href="/sia/index.php/admin/admin_blogs"> <div class="card">
                 <span class="mask bg-dark opacity-10 border-radius-lg"></span>
                 <div class="card-body p-3 position-relative">
                   <div class="row">
                     <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-active-40 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
+                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl" style="align-items: center; display: flex; justify-content: center; width: 50px; height: 50px;">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-right-heart-fill" viewBox="0 0 16 16">
+  <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+</svg>
                       </div>
                       <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        357
+                         <?php echo $blog_count; ?>
                       </h5>
-                      <span class="text-white text-sm">Click Events</span>
+                      <span class="text-white text-sm">Blogs Posted</span>
                     </div>
-                    <div class="col-4">
-                      <div class="dropstart text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers2" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers2">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+124%</p>
-                    </div>
+                   
                   </div>
                 </div>
-              </div>
+              </div></a>
             </div>
           </div>
           <div class="row mt-4">
@@ -94,27 +77,18 @@
                 <div class="card-body p-3 position-relative">
                   <div class="row">
                     <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-cart text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
+                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl" style="align-items: center; display: flex; justify-content: center; width: 50px; height: 50px;">
+
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+</svg>
                       </div>
                       <h5 class="text-white font-weight-bolder mb-0 mt-3">
                         2300
                       </h5>
                       <span class="text-white text-sm">Purchases</span>
                     </div>
-                    <div class="col-4">
-                      <div class="dropdown text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers3" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers3">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+15%</p>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -125,27 +99,18 @@
                 <div class="card-body p-3 position-relative">
                   <div class="row">
                     <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-like-2 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
+                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl" style="align-items: center; display: flex; justify-content: center; width: 50px; height: 50px;">
+
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+  <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+</svg>
                       </div>
                       <h5 class="text-white font-weight-bolder mb-0 mt-3">
                         940
                       </h5>
                       <span class="text-white text-sm">Likes</span>
                     </div>
-                    <div class="col-4">
-                      <div class="dropstart text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers4" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers4">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+90%</p>
-                    </div>
+                  
                   </div>
                 </div>
               </div>

@@ -19,10 +19,19 @@
 
         <link href="css/templatemo-topic-listing.css" rel="stylesheet">    
              
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
-
+<?php if ($this->session->flashdata('error')): ?>
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: "<?= $this->session->flashdata('error'); ?>"
+    });
+</script>
+<?php endif; ?>
 <?php $this->load->view('partials/header'); ?>
 <center><img src="/sia/uploads/test.png" alt="" style="height:170px;width:170px;"></center>
 <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">

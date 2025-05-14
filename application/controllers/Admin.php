@@ -2,35 +2,149 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
-
-    public function admin_dashboard()
+public function __construct()
     {
-        // Optional: restrict access to superusers
-        if (!$this->session->userdata('is_superuser')) {
-            show_error('Unauthorized access', 403);
-        }
-
-        // Load the blog_admin view
-        $this->load->view('admin/admin_dashboard');
+        parent::__construct();
+        // Load the user model
+        $this->load->model('UserModel');
+        $this->load->model('LogModel');
+$this->load->model('BlogModel');
+        
     }
-     public function admin_logs()
+   public function admin_dashboard()
+{
+    // Optional: restrict access to superusers
+    if (!$this->session->userdata('is_superuser')) {
+        show_error('Unauthorized access', 403);
+    }
+
+    // Load models
+    $this->load->model('UserModel');
+    $this->load->model('BlogModel');
+
+    // Collect data
+    $data['user_count'] = $this->UserModel->countUsers();
+    $data['blog_count'] = $this->BlogModel->countBlogs();
+    $data['page_title'] = 'Dashboard';
+    // Load view with all data
+    $this->load->view('admin/admin_dashboard', $data);
+
+}
+  public function admin_blogs()
     {
-        // Optional: restrict access to superusers
+       
+      
         if (!$this->session->userdata('is_superuser')) {
             show_error('Unauthorized access', 403);
         }
+       $data['blogs'] = $this->BlogModel->get_all_blogs(); 
+        $data['page_title'] = 'Blogs';
+        $this->load->view('admin/admin_blogs', $data);
+    }
 
-        // Load the blog_admin view
-        $this->load->view('admin/admin_logs');
+public function admin_logs()
+    {  
+        if (!$this->session->userdata('is_superuser')) {
+            show_error('Unauthorized access', 403);
+        }
+        $data['logs'] = $this->LogModel->get_all_logs(); 
+        $data['page_title'] = 'Logs';
+        $this->load->view('admin/admin_logs', $data);
     }
      public function admin_users()
     {
-        // Optional: restrict access to superusers
+        
         if (!$this->session->userdata('is_superuser')) {
             show_error('Unauthorized access', 403);
         }
-
-        // Load the blog_admin view
-        $this->load->view('admin/admin_users');
+        $data['users'] = $this->UserModel->get_all_users();
+        $data['page_title'] = 'Users';
+        $this->load->view('admin/admin_users', $data);
     }
+public function update()
+{
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    if ($input && isset($input['user_id']) && isset($input['data'])) {
+        $userId = $input['user_id'];
+        $updatedData = $input['data'];
+
+        $data = [
+            'username' => $updatedData['username'],
+            'email' => $updatedData['email'],
+            'password' => $updatedData['password'],
+            'first_login' => $updatedData['first_login'],
+            'is_superuser' => $updatedData['is_superuser']
+        ];
+
+        $this->db->where('id', $userId);
+        $this->db->update('users', $data);
+
+        // Log the update
+        $adminId = $this->session->userdata('user_id');
+        $adminUsername = $this->session->userdata('username');
+        $this->LogModel->log_action($adminId, $adminUsername, "Updated user ID $userId ({$data['username']})");
+
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+}
+
+public function update_blog()
+{
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    if ($input && isset($input['blog_id']) && isset($input['data'])) {
+        $blogId = $input['blog_id'];
+        $updatedData = $input['data'];
+
+        $data = [
+            'title' => $updatedData['title'],
+            'content' => $updatedData['content'],
+            'category' => $updatedData['category'],
+            'isAnonymous' => $updatedData['isAnonymous']
+        ];
+
+        $this->db->where('id', $blogId);
+        $this->db->update('blog_posts', $data);
+
+        // Log the blog update
+        $userId = $this->session->userdata('user_id');
+        $username = $this->session->userdata('username');
+        $this->LogModel->log_action($userId, $username, "Updated blog post ID $blogId titled '{$data['title']}'");
+
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+}
+
+
+public function delete_blog()
+{
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    if ($input && isset($input['blog_id'])) {
+        $blogId = $input['blog_id'];
+
+        // Get blog title for logging before deletion
+        $query = $this->db->get_where('blog_posts', ['id' => $blogId]);
+        $blog = $query->row_array();
+        $title = $blog ? $blog['title'] : 'Unknown Title';
+
+        $this->db->where('id', $blogId);
+        $this->db->delete('blog_posts');
+
+        // Log the deletion
+        $userId = $this->session->userdata('user_id');
+        $username = $this->session->userdata('username');
+        $this->LogModel->log_action($userId, $username, "Deleted blog post ID $blogId titled '{$title}'");
+
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+}
+
 }
