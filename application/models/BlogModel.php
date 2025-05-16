@@ -88,7 +88,8 @@ public function get_user_posts($userId)
     return $query->result_array();
 }
 public function get_all_blogs()
-    {
+    {   
+        $this->db->order_by('created_at', 'DESC');
         $query = $this->db->get('blog_posts'); 
         return $query->result();
     }

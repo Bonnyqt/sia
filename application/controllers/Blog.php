@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Blog extends CI_Controller
 {
     private $dataFile;
@@ -10,7 +9,7 @@ class Blog extends CI_Controller
         parent::__construct();
         $this->load->helper(['form', 'url']);
         $this->load->model(['BlogModel', 'UserModel','LogModel']);
-        $this->dataFile = APPPATH . '../writable/blog_posts.json'; // Adjusted path
+        $this->dataFile = APPPATH . '../writable/blog_posts.json'; 
         $this->load->library('session');
         
     }

@@ -112,6 +112,10 @@
         <?php endif; ?>
     </tbody>
 </table>
+<div class="mt-3">
+    <?= $pagination_links ?>
+</div>
+
     </div>
 
     

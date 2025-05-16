@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controllers;
-
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;

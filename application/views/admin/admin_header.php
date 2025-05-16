@@ -15,8 +15,8 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#">
-        <img src="/sia/uploads/test.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold" style="font-size:30px;font-family: myFirstFont;">LOST & VOCAL</span>
+        <img src="/sia/uploads/test2.png" class="navbar-brand-img h-60" alt="main_logo" style="width: 30px;height: 60px;">
+        <span class="ms-1 font-weight-bold" style="font-size:23px;font-family: myFirstFont;">LOST & VOCAL</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -132,10 +132,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
+          
           </div>
           <ul class="navbar-nav  justify-content-end">
           

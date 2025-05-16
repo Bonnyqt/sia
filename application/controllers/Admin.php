@@ -1,17 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Admin extends CI_Controller {
 public function __construct()
     {
         parent::__construct();
-        // Load the user model
+    
         $this->load->model('UserModel');
         $this->load->model('LogModel');
 $this->load->model('BlogModel');
         
     }
-   public function admin_dashboard()
+public function admin_dashboard()
 {
     // Optional: restrict access to superusers
     if (!$this->session->userdata('is_superuser')) {
@@ -21,15 +20,20 @@ $this->load->model('BlogModel');
     // Load models
     $this->load->model('UserModel');
     $this->load->model('BlogModel');
+$this->load->model('LogModel');
+$data['recent_logs'] = $this->LogModel->getRecentLogs(3); // limit to 5
 
     // Collect data
     $data['user_count'] = $this->UserModel->countUsers();
     $data['blog_count'] = $this->BlogModel->countBlogs();
+    $data['blogs'] = $this->BlogModel->get_all_blogs();
+    
     $data['page_title'] = 'Dashboard';
+
     // Load view with all data
     $this->load->view('admin/admin_dashboard', $data);
-
 }
+
   public function admin_blogs()
     {
        
@@ -43,14 +47,43 @@ $this->load->model('BlogModel');
     }
 
 public function admin_logs()
-    {  
-        if (!$this->session->userdata('is_superuser')) {
-            show_error('Unauthorized access', 403);
-        }
-        $data['logs'] = $this->LogModel->get_all_logs(); 
-        $data['page_title'] = 'Logs';
-        $this->load->view('admin/admin_logs', $data);
+{
+    if (!$this->session->userdata('is_superuser')) {
+        show_error('Unauthorized access', 403);
     }
+
+    $this->load->library('pagination');
+    $this->load->model('LogModel');
+
+    // Pagination config
+    $config['base_url'] = base_url('index.php/admin/admin_logs');
+    $config['total_rows'] = $this->LogModel->count_all_logs();
+    $config['per_page'] = 20;
+    $config['uri_segment'] = 3;
+
+    // Bootstrap 4/5 style pagination (optional)
+    $config['full_tag_open'] = '<ul class="pagination">';
+    $config['full_tag_close'] = '</ul>';
+    $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+    $config['num_tag_close'] = '</span></li>';
+    $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+    $config['cur_tag_close'] = '</span></li>';
+    $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+    $config['prev_tag_close'] = '</span></li>';
+    $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+    $config['next_tag_close'] = '</span></li>';
+
+    $this->pagination->initialize($config);
+
+    $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+    $data['logs'] = $this->LogModel->get_logs_paginated($config['per_page'], $page);
+    $data['pagination_links'] = $this->pagination->create_links();
+    $data['page_title'] = 'Logs';
+
+    $this->load->view('admin/admin_logs', $data);
+}
+
      public function admin_users()
     {
         

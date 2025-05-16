@@ -1,0 +1,15 @@
+runtime: php81
+entrypoint: serve index.php
+
+beta_settings:
+  cloud_sql_instances: "lost-459916:asia-east2:ci3-db-instance"
+
+handlers:
+  - url: /(.+\.(css|js|png|jpg|jpeg|gif|ico|svg|ttf|woff|woff2|html))
+    static_files: \1
+    upload: .+\.(css|js|png|jpg|jpeg|gif|ico|svg|ttf|woff|woff2|html)
+    secure: always
+
+  - url: /.*
+    script: index.php
+    secure: always

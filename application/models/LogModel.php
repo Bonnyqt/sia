@@ -19,4 +19,26 @@ class LogModel extends CI_Model
         $query = $this->db->get('logs'); 
         return $query->result();
     }
+    public function getRecentLogs($limit = 3)
+{
+    return $this->db
+                ->order_by('created_at', 'DESC')
+                ->limit($limit)
+                ->get('logs') // Replace with your actual logs table name
+                ->result();
+}
+public function count_all_logs()
+{
+    return $this->db->count_all('logs'); // Replace 'logs' with your table name
+}
+
+public function get_logs_paginated($limit, $start)
+{
+    return $this->db
+                ->order_by('created_at', 'DESC')
+                ->limit($limit, $start)
+                ->get('logs')
+                ->result();
+}
+
 }
