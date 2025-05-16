@@ -88,7 +88,7 @@
                       </h5>
                       <span class="text-white text-sm">Purchases</span>
                     </div>
-                   
+
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
                       </h5>
                       <span class="text-white text-sm">Likes</span>
                     </div>
-                  
+
                   </div>
                 </div>
               </div>
